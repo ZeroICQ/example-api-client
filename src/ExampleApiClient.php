@@ -8,7 +8,6 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Zeroicq\ExampleApiClient\DTO\Comment;
 use Zeroicq\ExampleApiClient\Exception\ApiException;
-use Zeroicq\ExampleApiClient\Exception\ValidationException;
 use Zeroicq\ExampleApiClient\Util\JsonHelper;
 
 class ExampleApiClient implements ExampleApiClientInterface
@@ -39,12 +38,11 @@ class ExampleApiClient implements ExampleApiClientInterface
     /**
      * {@inheritDoc}
      */
-    public function createComment(Comment $comment): void
+    public function createComment(string $name, string $text): void
     {
-        $this->validateNoId($comment);
         $body = $this->encodeBody([
-            'name' => $comment->name,
-            'text' => $comment->text,
+            'name' => $name,
+            'text' => $text,
         ]);
         $this->sendRequest('POST', '/comment', $body);
     }
@@ -110,17 +108,5 @@ class ExampleApiClient implements ExampleApiClientInterface
         } catch (\JsonException $ex) {
             throw new ApiException('Decoding response error', previous: $ex);
         }
-    }
-
-    /**
-     * @throws ValidationException
-     */
-    private function validateNoId(Comment $comment): void
-    {
-        if (is_null($comment->id)) {
-            return;
-        }
-
-        throw new ValidationException('id must be bull');
     }
 }

@@ -24,7 +24,7 @@ interface ExampleApiClientInterface
      * @throws ApiException
      * @throws ClientExceptionInterface
      */
-    public function createComment(Comment $comment): void;
+    public function createComment(string $name, string $text): void;
 
     /**
      * Update existing comment.

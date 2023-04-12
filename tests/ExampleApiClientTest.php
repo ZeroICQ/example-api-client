@@ -125,9 +125,7 @@ class ExampleApiClientTest extends TestCase
         ;
 
         $api = new ExampleApiClient($clientMock);
-        $api->createComment(
-            new Comment(null, 'my name', 'my text')
-        );
+        $api->createComment('my name', 'my text');
     }
 
     public function test503Error(): void
