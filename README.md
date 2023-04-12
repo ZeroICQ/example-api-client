@@ -6,14 +6,12 @@ example.com API client library
 Add folowing lines to your `composer.json` file:
 ```json 
 {
-  ...
   "repositories": [
     {
       "type": "vcs",
       "url": "https://github.com/ZeroICQ/example-api-client"
     }
   ]
-  ...
 }
 ```
 
